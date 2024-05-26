@@ -1,0 +1,253 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.7.0
+2 info using node@v21.7.3
+3 silly config:load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config:load:file:/home/container/.npmrc
+5 silly config:load:file:/usr/local/etc/npmrc
+6 verbose title npm install
+7 verbose argv "install"
+8 verbose logfile logs-max:10 dir:/home/container/.npm/_logs/2024-05-14T12_19_46_365Z-
+9 verbose logfile /home/container/.npm/_logs/2024-05-14T12_19_46_365Z-debug-0.log
+10 silly logfile start cleaning logs, removing 1 files
+11 silly logfile done cleaning log files
+12 silly idealTree buildDeps
+13 silly reify moves {}
+14 silly audit bulk request {
+14 silly audit   '@discordjs/builders': [ '1.8.1' ],
+14 silly audit   '@discordjs/collection': [ '1.5.3', '2.1.0' ],
+14 silly audit   '@discordjs/formatters': [ '0.4.0' ],
+14 silly audit   '@discordjs/rest': [ '2.3.0' ],
+14 silly audit   '@discordjs/util': [ '1.1.0' ],
+14 silly audit   '@discordjs/ws': [ '1.1.0' ],
+14 silly audit   '@esbuild/android-arm': [ '0.18.20' ],
+14 silly audit   '@esbuild/android-arm64': [ '0.18.20' ],
+14 silly audit   '@esbuild/android-x64': [ '0.18.20' ],
+14 silly audit   '@esbuild/darwin-arm64': [ '0.18.20' ],
+14 silly audit   '@esbuild/darwin-x64': [ '0.18.20' ],
+14 silly audit   '@esbuild/freebsd-arm64': [ '0.18.20' ],
+14 silly audit   '@esbuild/freebsd-x64': [ '0.18.20' ],
+14 silly audit   '@esbuild/linux-arm': [ '0.18.20' ],
+14 silly audit   '@esbuild/linux-arm64': [ '0.18.20' ],
+14 silly audit   '@esbuild/linux-ia32': [ '0.18.20' ],
+14 silly audit   '@esbuild/linux-loong64': [ '0.18.20' ],
+14 silly audit   '@esbuild/linux-mips64el': [ '0.18.20' ],
+14 silly audit   '@esbuild/linux-ppc64': [ '0.18.20' ],
+14 silly audit   '@esbuild/linux-riscv64': [ '0.18.20' ],
+14 silly audit   '@esbuild/linux-s390x': [ '0.18.20' ],
+14 silly audit   '@esbuild/linux-x64': [ '0.18.20' ],
+14 silly audit   '@esbuild/netbsd-x64': [ '0.18.20' ],
+14 silly audit   '@esbuild/openbsd-x64': [ '0.18.20' ],
+14 silly audit   '@esbuild/sunos-x64': [ '0.18.20' ],
+14 silly audit   '@esbuild/win32-arm64': [ '0.18.20' ],
+14 silly audit   '@esbuild/win32-ia32': [ '0.18.20' ],
+14 silly audit   '@esbuild/win32-x64': [ '0.18.20' ],
+14 silly audit   '@isaacs/cliui': [ '8.0.2' ],
+14 silly audit   'emoji-regex': [ '9.2.2', '10.3.0', '8.0.0' ],
+14 silly audit   'string-width': [ '5.1.2', '6.1.0', '4.2.3' ],
+14 silly audit   '@jridgewell/gen-mapping': [ '0.3.5' ],
+14 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
+14 silly audit   '@jridgewell/set-array': [ '1.2.1' ],
+14 silly audit   '@jridgewell/sourcemap-codec': [ '1.4.15' ],
+14 silly audit   '@jridgewell/trace-mapping': [ '0.3.25' ],
+14 silly audit   '@nodelib/fs.scandir': [ '2.1.5' ],
+14 silly audit   '@nodelib/fs.stat': [ '2.0.5' ],
+14 silly audit   '@nodelib/fs.walk': [ '1.2.8' ],
+14 silly audit   '@pkgjs/parseargs': [ '0.11.0' ],
+14 silly audit   '@sapphire/async-queue': [ '1.5.2' ],
+14 silly audit   '@sapphire/shapeshift': [ '3.9.7' ],
+14 silly audit   '@sapphire/snowflake': [ '3.5.3' ],
+14 silly audit   '@types/node': [ '20.12.12' ],
+14 silly audit   '@types/ws': [ '8.5.10' ],
+14 silly audit   '@vladfrangu/async_event_emitter': [ '2.2.4' ],
+14 silly audit   'ansi-regex': [ '6.0.1', '5.0.1' ],
+14 silly audit   'ansi-styles': [ '6.2.1', '4.3.0' ],
+14 silly audit   'any-promise': [ '1.3.0' ],
+14 silly audit   anymatch: [ '3.1.3' ],
+14 silly audit   'array-union': [ '2.1.0' ],
+14 silly audit   'balanced-match': [ '1.0.2' ],
+14 silly audit   'base64-js': [ '1.5.1' ],
+14 silly audit   'binary-extensions': [ '2.3.0' ],
+14 silly audit   bl: [ '5.1.0' ],
+14 silly audit   'brace-expansion': [ '2.0.1' ],
+14 silly audit   braces: [ '3.0.2' ],
+14 silly audit   buffer: [ '6.0.3' ],
+14 silly audit   'bundle-require': [ '4.0.2' ],
+14 silly audit   cac: [ '6.7.14' ],
+14 silly audit   chalk: [ '5.3.0' ],
+14 silly audit   chokidar: [ '3.6.0' ],
+14 silly audit   'cli-cursor': [ '4.0.0' ],
+14 silly audit   'cli-spinners': [ '2.9.2' ],
+14 silly audit   'color-convert': [ '2.0.1' ],
+14 silly audit   'color-name': [ '1.1.4' ],
+14 silly audit   commander: [ '11.1.0', '4.1.1' ],
+14 silly audit   commandkit: [ '0.1.10' ],
+14 silly audit   'cross-spawn': [ '7.0.3' ],
+14 silly audit   debug: [ '4.3.4' ],
+14 silly audit   'dir-glob': [ '3.0.1' ],
+14 silly audit   'discord-api-types': [ '0.37.83' ],
+14 silly audit   'discord.js': [ '14.15.2' ],
+14 silly audit   dotenv: [ '16.4.5' ],
+14 silly audit   eastasianwidth: [ '0.2.0' ],
+14 silly audit   esbuild: [ '0.18.20' ],
+14 silly audit   execa: [ '5.1.1' ],
+14 silly audit   'fast-deep-equal': [ '3.1.3' ],
+14 silly audit   'fast-glob': [ '3.3.2' ],
+14 silly audit   fastq: [ '1.17.1' ],
+14 silly audit   'fill-range': [ '7.0.1' ],
+14 silly audit   'foreground-child': [ '3.1.1' ],
+14 silly audit   'signal-exit': [ '4.1.0', '3.0.7' ],
+14 silly audit   fsevents: [ '2.3.3' ],
+14 silly audit   'get-stream': [ '6.0.1' ],
+14 silly audit   glob: [ '10.3.12' ],
+14 silly audit   'glob-parent': [ '5.1.2' ],
+14 silly audit   globby: [ '11.1.0' ],
+14 silly audit   'human-signals': [ '2.1.0' ],
+14 silly audit   ieee754: [ '1.2.1' ],
+14 silly audit   ignore: [ '5.3.1' ],
+14 silly audit   inherits: [ '2.0.4' ],
+14 silly audit   'is-binary-path': [ '2.1.0' ],
+14 silly audit   'is-extglob': [ '2.1.1' ],
+14 silly audit   'is-fullwidth-code-point': [ '3.0.0' ],
+14 silly audit   'is-glob': [ '4.0.3' ],
+14 silly audit   'is-interactive': [ '2.0.0' ],
+14 silly audit   'is-number': [ '7.0.0' ],
+14 silly audit   'is-stream': [ '2.0.1' ],
+14 silly audit   'is-unicode-supported': [ '1.3.0' ],
+14 silly audit   isexe: [ '2.0.0' ],
+14 silly audit   jackspeak: [ '2.3.6' ],
+14 silly audit   joycon: [ '3.1.1' ],
+14 silly audit   lilconfig: [ '3.1.1' ],
+14 silly audit   'lines-and-columns': [ '1.2.4' ],
+14 silly audit   'load-tsconfig': [ '0.2.5' ],
+14 silly audit   lodash: [ '4.17.21' ],
+14 silly audit   'lodash.snakecase': [ '4.1.1' ],
+14 silly audit   'lodash.sortby': [ '4.7.0' ],
+14 silly audit   'log-symbols': [ '5.1.0' ],
+14 silly audit   'lru-cache': [ '10.2.0' ],
+14 silly audit   'magic-bytes.js': [ '1.10.0' ],
+14 silly audit   'merge-stream': [ '2.0.0' ],
+14 silly audit   merge2: [ '1.4.1' ],
+14 silly audit   micromatch: [ '4.0.5' ],
+14 silly audit   'mimic-fn': [ '2.1.0' ],
+14 silly audit   minimatch: [ '9.0.4' ],
+14 silly audit   minipass: [ '7.0.4' ],
+14 silly audit   ms: [ '2.1.2' ],
+14 silly audit   mz: [ '2.7.0' ],
+14 silly audit   'normalize-path': [ '3.0.0' ],
+14 silly audit   'npm-run-path': [ '4.0.1' ],
+14 silly audit   'object-assign': [ '4.1.1' ],
+14 silly audit   onetime: [ '5.1.2' ],
+14 silly audit   ora: [ '7.0.1' ],
+14 silly audit   'path-key': [ '3.1.1' ],
+14 silly audit   'path-scurry': [ '1.10.2' ],
+14 silly audit   'path-type': [ '4.0.0' ],
+14 silly audit   picomatch: [ '2.3.1' ],
+14 silly audit   pirates: [ '4.0.6' ],
+14 silly audit   'postcss-load-config': [ '4.0.2' ],
+14 silly audit   punycode: [ '2.3.1' ],
+14 silly audit   'queue-microtask': [ '1.2.3' ],
+14 silly audit   'readable-stream': [ '3.6.2' ],
+14 silly audit   readdirp: [ '3.6.0' ],
+14 silly audit   'resolve-from': [ '5.0.0' ],
+14 silly audit   'restore-cursor': [ '4.0.0' ],
+14 silly audit   reusify: [ '1.0.4' ],
+14 silly audit   rfdc: [ '1.3.1' ],
+14 silly audit   rimraf: [ '5.0.5' ],
+14 silly audit   rollup: [ '3.29.4' ],
+14 silly audit   'run-parallel': [ '1.2.0' ],
+14 silly audit   'safe-buffer': [ '5.2.1' ],
+14 silly audit   'shebang-command': [ '2.0.0' ],
+14 silly audit   'shebang-regex': [ '3.0.0' ],
+14 silly audit   slash: [ '3.0.0' ],
+14 silly audit   'source-map': [ '0.8.0-beta.0' ],
+14 silly audit   'stdin-discarder': [ '0.1.0' ],
+14 silly audit   string_decoder: [ '1.3.0' ],
+14 silly audit   'strip-ansi': [ '6.0.1', '7.1.0' ],
+14 silly audit   'strip-final-newline': [ '2.0.0' ],
+14 silly audit   sucrase: [ '3.35.0' ],
+14 silly audit   thenify: [ '3.3.1' ],
+14 silly audit   'thenify-all': [ '1.6.0' ],
+14 silly audit   'to-regex-range': [ '5.0.1' ],
+14 silly audit   tr46: [ '1.0.1' ],
+14 silly audit   'tree-kill': [ '1.2.2' ],
+14 silly audit   'ts-interface-checker': [ '0.1.13' ],
+14 silly audit   'ts-mixer': [ '6.0.4' ],
+14 silly audit   tslib: [ '2.6.2' ],
+14 silly audit   tsup: [ '7.2.0' ],
+14 silly audit   undici: [ '6.13.0' ],
+14 silly audit   'undici-types': [ '5.26.5' ],
+14 silly audit   'util-deprecate': [ '1.0.2' ],
+14 silly audit   'webidl-conversions': [ '4.0.2' ],
+14 silly audit   'whatwg-url': [ '7.1.0' ],
+14 silly audit   which: [ '2.0.2' ],
+14 silly audit   'wrap-ansi': [ '8.1.0', '7.0.0' ],
+14 silly audit   ws: [ '8.17.0' ],
+14 silly audit   yaml: [ '2.4.1' ]
+14 silly audit }
+15 verbose reify failed optional dependency /home/container/node_modules/fsevents
+16 silly reify mark deleted [ '/home/container/node_modules/fsevents' ]
+17 verbose reify failed optional dependency /home/container/node_modules/@esbuild/win32-ia32
+18 silly reify mark deleted [ '/home/container/node_modules/@esbuild/win32-ia32' ]
+19 verbose reify failed optional dependency /home/container/node_modules/@esbuild/win32-arm64
+20 silly reify mark deleted [ '/home/container/node_modules/@esbuild/win32-arm64' ]
+21 verbose reify failed optional dependency /home/container/node_modules/@esbuild/sunos-x64
+22 silly reify mark deleted [ '/home/container/node_modules/@esbuild/sunos-x64' ]
+23 verbose reify failed optional dependency /home/container/node_modules/@esbuild/openbsd-x64
+24 silly reify mark deleted [ '/home/container/node_modules/@esbuild/openbsd-x64' ]
+25 verbose reify failed optional dependency /home/container/node_modules/@esbuild/netbsd-x64
+26 silly reify mark deleted [ '/home/container/node_modules/@esbuild/netbsd-x64' ]
+27 verbose reify failed optional dependency /home/container/node_modules/@esbuild/linux-s390x
+28 silly reify mark deleted [ '/home/container/node_modules/@esbuild/linux-s390x' ]
+29 verbose reify failed optional dependency /home/container/node_modules/@esbuild/linux-riscv64
+30 silly reify mark deleted [ '/home/container/node_modules/@esbuild/linux-riscv64' ]
+31 verbose reify failed optional dependency /home/container/node_modules/@esbuild/linux-ppc64
+32 silly reify mark deleted [ '/home/container/node_modules/@esbuild/linux-ppc64' ]
+33 verbose reify failed optional dependency /home/container/node_modules/@esbuild/linux-mips64el
+34 silly reify mark deleted [ '/home/container/node_modules/@esbuild/linux-mips64el' ]
+35 verbose reify failed optional dependency /home/container/node_modules/@esbuild/linux-loong64
+36 silly reify mark deleted [ '/home/container/node_modules/@esbuild/linux-loong64' ]
+37 verbose reify failed optional dependency /home/container/node_modules/@esbuild/linux-ia32
+38 silly reify mark deleted [ '/home/container/node_modules/@esbuild/linux-ia32' ]
+39 verbose reify failed optional dependency /home/container/node_modules/@esbuild/linux-arm64
+40 silly reify mark deleted [ '/home/container/node_modules/@esbuild/linux-arm64' ]
+41 verbose reify failed optional dependency /home/container/node_modules/@esbuild/linux-arm
+42 silly reify mark deleted [ '/home/container/node_modules/@esbuild/linux-arm' ]
+43 verbose reify failed optional dependency /home/container/node_modules/@esbuild/freebsd-x64
+44 silly reify mark deleted [ '/home/container/node_modules/@esbuild/freebsd-x64' ]
+45 verbose reify failed optional dependency /home/container/node_modules/@esbuild/freebsd-arm64
+46 silly reify mark deleted [ '/home/container/node_modules/@esbuild/freebsd-arm64' ]
+47 verbose reify failed optional dependency /home/container/node_modules/@esbuild/darwin-x64
+48 silly reify mark deleted [ '/home/container/node_modules/@esbuild/darwin-x64' ]
+49 verbose reify failed optional dependency /home/container/node_modules/@esbuild/darwin-arm64
+50 silly reify mark deleted [ '/home/container/node_modules/@esbuild/darwin-arm64' ]
+51 verbose reify failed optional dependency /home/container/node_modules/@esbuild/android-x64
+52 silly reify mark deleted [ '/home/container/node_modules/@esbuild/android-x64' ]
+53 verbose reify failed optional dependency /home/container/node_modules/@esbuild/android-arm64
+54 silly reify mark deleted [ '/home/container/node_modules/@esbuild/android-arm64' ]
+55 verbose reify failed optional dependency /home/container/node_modules/@esbuild/android-arm
+56 silly reify mark deleted [ '/home/container/node_modules/@esbuild/android-arm' ]
+57 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 441ms
+58 silly audit report {}
+59 silly ADD
+60 silly ADD
+61 silly ADD
+62 silly ADD
+63 silly ADD
+64 silly ADD
+65 silly ADD
+66 silly ADD
+67 silly ADD
+68 silly ADD
+69 silly ADD
+70 silly ADD
+71 silly ADD
+72 silly ADD
+73 silly ADD
+74 silly ADD
+75 silly ADD
+76 silly ADD
+77 silly ADD
+78 silly ADD
+79 silly ADD
+80 verbose exit 0
+81 info ok
