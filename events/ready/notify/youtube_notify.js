@@ -31,6 +31,7 @@ module.exports = async (client) => {
             try {
                 // Find the latest video from the database
                 const currentVideoId = videoEntry['yt:videoId'][0];
+                // console.log(currentVideoId)
                 const existingVideo = await Video.findOne({ videoId: currentVideoId });
                 if (!existingVideo) {
                     // New video, create and send embed message

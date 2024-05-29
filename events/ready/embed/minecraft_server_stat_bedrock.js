@@ -2,6 +2,7 @@ const { EmbedBuilder, Client } = require('discord.js');
 const config = require('../../../config/config_id_channel.json');
 module.exports = async (client) => {
     const channel = await client.channels.cache.get(config.id_minecraft);
+    if (!channel) return
     const embed = new EmbedBuilder().setTitle('Server Minecraft (BEDROCK) Information').setThumbnail('https://i.imgur.com/eBzBmxb.png');
     const message = await channel.send({ embeds: [embed] });
     const ip = 'chanakun428.thddns.net:8000';
