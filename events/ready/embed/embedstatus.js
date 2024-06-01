@@ -46,6 +46,7 @@ module.exports = async (client) => {
         const formattedTime = timeFormatter.format(now); // Format time
         await embed.setColor('Random')
         await embed.setFields(
+          // { name: `<\:tiktok:1245956894133194826>`, value: ` ` },
           { name: 'total user', value: `👥  ${totalMembers.toString()}` },
           { name: 'total member', value: `🧑  ${totalUsers.toString()}` },
           { name: 'total bot', value: `🤖  ${totalBots.toString()}` },

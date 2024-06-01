@@ -8,7 +8,7 @@
 
 
 //     // ชื่อผู้ใช้ TikTok ของคุณ
-//     const USER_UNIQUE_ID = "babymonster_yg_tiktok";
+//     const USER_UNIQUE_ID = "artur7932";
 
 //     // เราใช้ Apple ตามคอมเมนต์ในรีโพจากผู้พัฒนา ซึ่งช่วยป้องกันไม่ให้ TikTok ตรวจจับด้วย Captcha
 //     const USER_AGENT =
@@ -56,7 +56,7 @@
 
 //         const res = await testApiReq({ userAgent, xTtParams, signed_url });
 //         const { data } = res;
-//        // console.log(data); // แสดงผลลัพธ์ที่ได้จากการร้องขอ API
+//         console.log(data); // แสดงผลลัพธ์ที่ได้จากการร้องขอ API
 //         // console.log(data.userInfo.user.nickname)
 //         const channel = client.channels.cache.get('1240554928024326175');
 //         const embed = new EmbedBuilder()

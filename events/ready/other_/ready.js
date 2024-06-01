@@ -2,9 +2,14 @@ const { Client, ActivityType } = require('discord.js');
 const mongoose = require('mongoose');
 const mongoURL = process.env.mongoURL;
 
-module.exports = async (client) => {
 
-    console.log(`${client.user.tag} is Ready`);
+module.exports = async (client) => {
+    console.clear();
+
+    (async () => {
+        const chalk = await import('chalk');
+        console.log(chalk.default.hex('#DEADED').bold(`${client.user.tag} is Ready`));
+    })();
 
     if (!mongoURL) {
         console.log('MongoDB URL not provided. Please set the mongoURL in your environment variables.');
@@ -37,5 +42,6 @@ module.exports = async (client) => {
     };
 
     setPresence();
-    setInterval(setPresence, 60000);
+    setInterval(setPresence, 60000); // อัปเดตสถานะของบอททุกๆ 60 วินาที
 };
+

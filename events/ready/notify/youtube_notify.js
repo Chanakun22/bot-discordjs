@@ -59,10 +59,14 @@ module.exports = async (client) => {
                         channelTitle: channelTitle
                     });
                     await newVideoData.save();
-                    console.log(`Video saved to database: ${videoTitle}`);
+                    // console.log(`Video saved to database: ${videoTitle}`);
                     // Send the embed message to the Discord channel
                     await channel.send({ embeds: [embedMessage] });
-                    console.log(`[${channelTitle}]: ${videoTitle} VideoId: ${currentVideoId}`);
+                    // console.log(`[${channelTitle}]: ${videoTitle} VideoId: ${currentVideoId}`);
+                    (async () => {
+                        const chalk = await import('chalk');
+                        console.log(chalk.default.hex('#ECE81A').bold(chalk.default.hex('#e23a08').bold(`🔔[Youtube]`) + `[${channelTitle}]` + chalk.default.hex('#ffffff').bold(`>>`) + chalk.default.blue.underline.bold(` ${videoTitle}`)));
+                    })();
                 }
             } catch (err) {
                 console.error('Error sending notification:', err);
