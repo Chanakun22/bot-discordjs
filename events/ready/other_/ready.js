@@ -4,7 +4,7 @@ const mongoURL = process.env.mongoURL;
 
 
 module.exports = async (client) => {
-    console.clear();
+    // console.clear();
 
     (async () => {
         const chalk = await import('chalk');

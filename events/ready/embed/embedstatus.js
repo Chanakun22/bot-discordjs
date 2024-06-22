@@ -1,78 +1,116 @@
-const {EmbedBuilder} = require('discord.js');
-const config = require('../../../config/config_id_channel.json')
+const { EmbedBuilder, ChannelType } = require('discord.js');
+const config = require('../../../config/config_id_channel.json');
 
-let onlineMemberCount_lasted = 0;
+let lastStatusCounts = {
+  online: 0,
+  dnd: 0,
+  idle: 0,
+  offline: 0
+};
+
+let userStatus = {};
+let changedUsers = [];
+
+function getStatusEmoji(status) {
+  switch (status) {
+    case 'online': return '🟢';
+    case 'idle': return '🌙';
+    case 'dnd': return '🔴';
+    case 'offline': return '⚫';
+    default: return '❓';
+  }
+}
 
 module.exports = async (client) => {
   const channel = await client.channels.cache.get(config.id_embed_status);
-  const deletemessage = await channel.messages.fetch({ limit: 4 });
-  await deletemessage.forEach(async deletemessage => {
-    await deletemessage.delete();
-  });
+
+  if (!channel) {
+    console.error('Channel not found');
+    return;
+  }
+
+  const messages = await channel.messages.fetch({ limit: 4 });
+  await Promise.all(messages.map(message => message.delete()));
+
   const embed = new EmbedBuilder()
     .setTitle('Server Information')
-    .setDescription('Update Server Information every 30 sec')
-    .setColor('#ff0000');
+    .setColor('Red');
+
   const message = await channel.send({ embeds: [embed] });
   const guild = client.guilds.cache.get('1169260319823106169');
-  let intervalId = setInterval(async () => {
+
+  if (!guild) {
+    console.error('Guild not found');
+    return;
+  }
+
+  setInterval(async () => {
     try {
-      let totalMembers = await guild.members.cache.size;
-      let totalUsers = await guild.members.cache.filter(member => !member.user.bot).size;
-      let totalBots = await guild.members.cache.filter(member => member.user.bot).size;
-      let onlineMembers = await guild.members.cache.filter(m => m.presence?.status === 'online').size;
-      let dndMembers = await guild.members.cache.filter(m => m.presence?.status === 'dnd').size;
-      let idleMembers = await guild.members.cache.filter(m => m.presence?.status === 'idle').size;
-      let offlineMembers = await guild.members.cache.filter(m => m.presence?.status === 'offline' || !m.presence).size;
-      let onlineMemberCount = await onlineMembers + dndMembers + idleMembers;
-      // Get current date and time
-      if (onlineMemberCount_lasted != onlineMemberCount) {
+      const members = await guild.members.fetch();
+      changedUsers = []; // รีเซ็ตรายชื่อผู้ใช้ที่เปลี่ยนแปลงในแต่ละรอบ
+
+      const statusCounts = {
+        total: members.size,
+        users: members.filter(m => !m.user.bot).size,
+        bots: members.filter(m => m.user.bot).size,
+        online: members.filter(m => m.presence?.status === 'online').size,
+        dnd: members.filter(m => m.presence?.status === 'dnd').size,
+        idle: members.filter(m => m.presence?.status === 'idle').size,
+        offline: members.filter(m => !m.presence || m.presence.status === 'offline').size,
+        active: 0
+      };
+
+      statusCounts.active = statusCounts.online + statusCounts.dnd + statusCounts.idle - members.filter(m => m.user.bot && m.presence?.status !== 'offline').size;
+
+      // อัปเดต userStatus และตรวจสอบการเปลี่ยนแปลง
+      members.forEach(member => {
+        const username = String(member.user.username);
+        const currentStatus = member.presence ? member.presence.status : 'offline';
+
+        if (userStatus[username] !== currentStatus) {
+          changedUsers.push({
+            username: username,
+            oldStatus: userStatus[username] || 'unknown',
+            newStatus: currentStatus
+          });
+        }
+
+        userStatus[username] = currentStatus;
+      });
+
+      if (Object.keys(lastStatusCounts).some(key => lastStatusCounts[key] !== statusCounts[key])) {
         const now = new Date();
-        const dateOptions = {
-          year: 'numeric',    // "numeric" for year (e.g., 2024)
-          month: 'long',      // "long" for full month name (e.g., January)
-          day: '2-digit'      // "2-digit" for zero-padded day of the month (e.g., 01)
-        };
-        const timeOptions = {
-          hour: '2-digit',    // "2-digit" for zero-padded hour (e.g., 01, 02, ..., 12)
-          minute: '2-digit',  // "2-digit" for zero-padded minute (e.g., 00, 01, ..., 59)
-          second: '2-digit',  // "2-digit" for zero-padded second (e.g., 00, 01, ..., 59)
-          hour12: false       // Use 24-hour format (e.g., 13:00 instead of 1:00 PM)
-        };
-        // Format the date and time separately
-        const dateFormatter = new Intl.DateTimeFormat('th-TH', dateOptions);
-        const timeFormatter = new Intl.DateTimeFormat('th-TH', timeOptions);
-        const formattedDate = dateFormatter.format(now); // Format date
-        const formattedTime = timeFormatter.format(now); // Format time
-        await embed.setColor('Random')
-        await embed.setFields(
-          // { name: `<\:tiktok:1245956894133194826>`, value: ` ` },
-          { name: 'total user', value: `👥  ${totalMembers.toString()}` },
-          { name: 'total member', value: `🧑  ${totalUsers.toString()}` },
-          { name: 'total bot', value: `🤖  ${totalBots.toString()}` },
-          { name: 'member online status', value: `🟢  ${onlineMembers.toString()}` },
-          { name: 'member dnd status', value: `🚫  ${dndMembers.toString()}` },
-          { name: 'member idle status', value: `🌙  ${idleMembers.toString()}` },
-          { name: 'member offline status', value: `⚫  ${offlineMembers.toString()}` },
-          { name: 'member online now', value: `📶  ${onlineMemberCount.toString() - 3}` },
-          { name: ' ', value: ` ` },
-          { name: 'Text Channels', value: `#️⃣${guild.channels.cache.filter((c) => c.type === 0).toJSON().length - 3}`, inline: true },
-          { name: 'Voice Channels', value: `🔊${guild.channels.cache.filter((c) => c.type === 2).toJSON().length}`, inline: true },
-          { name: '\u200B', value: ` ` },
-          // { name: 'Created by', value: '_nv23' },
-          { name: 'Last Update', value: `${formattedDate} | ${formattedTime}` }
-        )
-        // embed.setTimestamp()
-        embed.setFooter({text : `_nv23`})
+        // สร้างข้อความสำหรับการเปลี่ยนแปลงสถานะ
+        let statusChangesText = '';
+        const maxChangesToShow = 3; // จำกัดจำนวนการเปลี่ยนแปลงที่แสดง
+        changedUsers.slice(0, maxChangesToShow).forEach(user => {
+          const oldEmoji = getStatusEmoji(user.oldStatus);
+          const newEmoji = getStatusEmoji(user.newStatus);
+          statusChangesText += `**${user.username}**: ${oldEmoji} ${user.oldStatus} -> ${newEmoji} ${user.newStatus}\n`;
+        });
+        if (changedUsers.length > maxChangesToShow) {
+          statusChangesText += `และอีก **${changedUsers.length - maxChangesToShow}** การเปลี่ยนแปลง\n`;
+        }
+
+        embed.setColor('Random').setFields(
+          { name: 'Total Users', value: `👥  ${statusCounts.total}`, inline: false },
+          { name: 'Total Members', value: `🧑  ${statusCounts.users}`, inline: false },
+          { name: 'Total Bots', value: `🤖  ${statusCounts.bots}`, inline: false },
+          { name: 'Online Members', value: `🟢  ${statusCounts.online}`, inline: false },
+          { name: 'DND Members', value: `🚫  ${statusCounts.dnd}`, inline: false },
+          { name: 'Idle Members', value: `🌙  ${statusCounts.idle}`, inline: false },
+          { name: 'Offline Members', value: `⚫  ${statusCounts.offline}`, inline: false },
+          { name: 'Active Members', value: `📶  ${statusCounts.active}`, inline: false },
+          { name: 'Text Channels', value: `#️⃣ ${guild.channels.cache.filter(c => c.type === ChannelType.GuildText).size}`, inline: true },
+          { name: 'Voice Channels', value: `🔊 ${guild.channels.cache.filter(c => c.type === ChannelType.GuildVoice).size}`, inline: true },
+          { name: 'Recent Status Changes', value: statusChangesText || 'No recent changes', inline: false }
+        ).setFooter({ text: 'Update Server information every status change' }).setTimestamp();
+
         await message.edit({ embeds: [embed] });
-        onlineMemberCount_lasted = onlineMemberCount;
+        lastStatusCounts = statusCounts;
       }
-    }
-    catch (error) {
-      console.log(error)
+    } catch (error) {
+      console.error(error);
     }
   }, 1000);
-
-
-
-}
+};
