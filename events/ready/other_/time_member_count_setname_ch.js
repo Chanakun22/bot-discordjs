@@ -1,14 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder, Client, ContextMenuCommandInteraction, CommandInteraction, ActivityType } = require('discord.js');
+const config = require('../../../config/config_id_channel.json');
 
-const config = require('../../../config/config_id_channel.json')
-/**
- * 
- * @param {*} client 
- */
-
-let daydif = 0
-let mem_count = 0
-
+let daydif = 0;
+let mem_count = 0;
 
 module.exports = async (client) => {
     try {
@@ -17,50 +11,59 @@ module.exports = async (client) => {
         async function date_() {
             const now = new Date();
             const dateOptions = {
-                year: 'numeric',    // "numeric" for year (e.g., 2024)
-                month: 'long',      // "long" for full month name (e.g., January)
-                day: '2-digit'      // "2-digit" for zero-padded day of the month (e.g., 01)
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit'
             };
             const dateFormatter = new Intl.DateTimeFormat('en-US', dateOptions);
-            const formattedDate = dateFormatter.format(now); // Format date
-            await client.channels.cache.get(config.id_change_name_date_ch).setName(`📆${formattedDate}`)
+            const formattedDate = dateFormatter.format(now);
+            await client.channels.cache.get(config.id_change_name_date_ch).setName(`📆${formattedDate}`);
         }
 
-        async function count_member() {
-            let onlineMembers = await guild.members.cache.filter(m => m.presence?.status === 'online').size;
-            let dndMembers = await guild.members.cache.filter(m => m.presence?.status === 'dnd').size;
-            let idleMembers = await guild.members.cache.filter(m => m.presence?.status === 'idle').size;
-            let onlineMemberCount = await onlineMembers + dndMembers + idleMembers;
-            await client.channels.cache.get(config.id_change_name_memcount_ch).setName(`🟢 ${onlineMemberCount - 3}`)
+        function withTimeout(promise, timeout) {
+            return Promise.race([
+                promise,
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('หมดเวลา')), timeout)
+                )
+            ]);
         }
-
 
         setInterval(async () => {
-            const now = new Date();
-            const dateOptions = {
-                day: '2-digit'
-            }
-            const dateFormatter = new Intl.DateTimeFormat('en-US', dateOptions);
-            const formattedDate = dateFormatter.format(now);
-            let onlineMembers = await guild.members.cache.filter(m => m.presence?.status === 'online').size;
-            let dndMembers = await guild.members.cache.filter(m => m.presence?.status === 'dnd').size;
-            let idleMembers = await guild.members.cache.filter(m => m.presence?.status === 'idle').size;
-            let onlineMemberCount = await onlineMembers + dndMembers + idleMembers;
-            ///////สิ้นสุดการกำหนดตัวเเป///////
-            if (formattedDate != daydif) {
-                daydif = formattedDate
-                date_()
-            } 
-            if (onlineMemberCount != mem_count) {
-                mem_count = onlineMemberCount   
-                count_member()
-            }
+            try {
+                const now = new Date();
+                const dateOptions = {
+                    day: '2-digit'
+                };
+                const dateFormatter = new Intl.DateTimeFormat('en-US', dateOptions);
+                const formattedDate = dateFormatter.format(now);
+                const members = await withTimeout(guild.members.fetch(), 60000);
+                const onlineMemberCount = members.filter(m => !m.user.bot && ['online', 'dnd', 'idle'].includes(m.presence?.status)).size;
 
-        }, 20000)
-    }
-    catch (error) {
-        console.error(`voice channle setname Eror : ${error}`)
+                if (formattedDate != daydif) {
+                    daydif = formattedDate;
+                    setTimeout(() => {
+                        date_();
+                        console.log('[newstatus_ch]', daydif);
+                    }, 60000);
+                }
+
+                if (onlineMemberCount != mem_count) {
+                    mem_count = onlineMemberCount;
+                    setTimeout(async () => {
+                        await client.channels.cache.get(config.id_change_name_memcount_ch).setName(`🟢 ${onlineMemberCount}`);
+                        console.log('[newstatus_ch]', mem_count);
+                    }, 60000);
+                }
+            } catch (error) {
+                if (error.message === 'หมดเวลา') {
+                    console.error('การดึงข้อมูลสมาชิกใช้เวลานานเกินไป');
+                } else {
+                    console.error('เกิดข้อผิดพลาด:', error);
+                }
+            }
+        }, 1000);
+    } catch (error) {
+        console.error(`voice channle setname Eror : ${error}`);
     }
 }
-
-// 

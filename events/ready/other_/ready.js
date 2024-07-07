@@ -4,7 +4,7 @@ const mongoURL = process.env.mongoURL;
 
 
 module.exports = async (client) => {
-    // console.clear();
+    
 
     (async () => {
         const chalk = await import('chalk');
@@ -36,8 +36,8 @@ module.exports = async (client) => {
         }).format(now);
 
         client.user.setPresence({
-            activities: [{ name: `⏰: ${formattedTime}`, type: ActivityType.Watching }],
-            status: 'dnd'
+            activities: [{ name: `/music play เพื่อเล่นเพลง`, type: ActivityType.Watching }],
+            status: 'online'
         });
     };
 

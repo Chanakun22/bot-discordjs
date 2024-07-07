@@ -5,7 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('serverinfoo')
         .setDescription('information in the server'),
-    run: async ({ interaction, client, handler }) => {
+        run: async ({ interaction, client, handler }) => {
         if (!interaction.inGuild()) {
             interaction.reply({
                 content: "You can only run this Command inside a server",

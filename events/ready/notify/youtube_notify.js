@@ -88,12 +88,12 @@ async function sendNotification(client, { videoEntry, channelTitle }) {
 // Main function to check for new videos and send notifications
 async function checkForNewVideos(client) {
     try {
-        setTimeout(function () {
-            server.close(() => {
-                console.log("Server shutdown completed.");
-                process.exit(1);
-            });
-        }, 1 * 60 * 60 * 1000);
+        // setTimeout(function () {
+        //     server.close(() => {
+        //         console.log("Server shutdown completed.");
+        //         process.exit(1);
+        //     });
+        // }, 1 * 60 * 60 * 1000);
         const videoPromises = config.channel_id.map(channelId => getLatestVideo(channelId));
         const videos = await Promise.all(videoPromises);
         for (const videoData of videos) {
